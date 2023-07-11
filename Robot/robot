@@ -1,0 +1,33 @@
+#!/bin/sh
+
+get_NATIF_VS_VM()
+{
+ ThirdValue=`hostname -I | cut -d . -f 3`
+ # NATIF, ThirdValue: 1 or 2
+ # VM   , ThirdValue: 6 or 7 ?
+ if test $ThirdValue -eq 1 -o $ThirdValue -eq 2
+ then echo NATIF
+ else echo VM
+ fi
+}
+
+# DIR_EXEC=NATIF  
+# ou bien
+# DIR_EXEC=VM  
+
+DIR_EXEC=`get_NATIF_VS_VM`
+EXEC=fuzzyRobot
+#-------------------------------------------------------
+for m in $*     # remove -a from $*
+do
+ echo $m
+ if test $m != "-a"; then  
+    if test -z "$PARAM"; then PARAM=$m
+                         else PARAM=${PARAM}" "$m
+    fi
+ fi
+done
+
+if test -z "$PARAM";then set $$;shift;else set $PARAM;fi
+#-------------------------------------------------------
+${DIR_EXEC}/${EXEC} $*

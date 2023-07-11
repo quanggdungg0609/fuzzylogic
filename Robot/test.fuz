@@ -1,0 +1,48 @@
+configuration
+{
+    et := min;
+    ou := max;
+    decodage := centre;
+    implication := mamdani;
+    ainsi_que := max;
+}
+
+linguistique
+{
+    onRight := rampe_bas(-90.0, 0.0);
+    inFront := triangle(-90.0, 0.0, 90.0);
+    onLeft := rampe_haut(0.0, 90.0);
+
+    turnRight := triangle(-150.0, -50.0, 0.0);
+    turnLeft := triangle(0.0, 50.0, 150.0);
+    straightOn := triangle(-150.0,0.0,150.0); 
+ 
+    turnMaxLeft := triangle(0.0, 90.0, 300.0);
+    turnMaxRight := triangle(-300.0, -90.0, 0.0); 
+
+    obstClose := rampe_bas(0.0, 400.0);
+    obstVeryClose := rampe_bas(80.0, 100.0);
+    obstFar := rampe_haut(0.0, 400.0);
+    obstCrash := rampe_bas(95.0, 100.0);
+ 
+    
+    Reculer := triangle(-350.0, -300.0, -250.0);	
+    minVitesse := triangle(-50.0, 100.0, 150.0);
+    maxVitesse := triangle(0.0, 200.0, 300.0);
+}
+
+regles
+{
+	si DistGoal est obstClose alors Slin est Reculer;
+
+    si DirecGoal est onRight alors Sang est turnRight;
+
+    si DirecGoal est onLeft alors Sang est turnLeft;
+
+    si DirecGoal est inFront alors Sang est straightOn;
+
+     si ObstFront est obstFar et ObstLeft est obstFar et ObstRight est obstFar alors Slin est maxVitesse;
+
+    si ObstFront est obstClose ou ObstLeft est obstClose ou ObstRight est obstClose alors Slin est minVitesse;
+   
+}

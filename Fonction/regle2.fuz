@@ -1,0 +1,33 @@
+// ----------------------------------------------------------------------------
+// File       : exemplePoly.fuz
+// Usage      : pg <filename> (prog. ecrit par P.Reignier)
+// ----------------------------------------------------------------------------
+
+configuration
+{
+	et := min;
+	ou := max;
+	decodage := max;
+        implication := larsen;
+        ainsi_que := max; // changer de some -> max
+}
+
+linguistique
+{   
+     //Variable entree de X
+	petit:= rampe_bas(0.0, 0.5);
+    grand:= rampe_haut(0.0, 0.5);
+
+    // Variable de sortie Z
+    petitZ:= triangle(-0.25, 0.0, 0.25);
+    grandZ:= triangle( 11.75, 12.0, 12.25);
+}
+
+regles
+{
+    si X est petit alors Z est petitZ; //R1
+    si X est grand alors Z est grandZ; //R2
+
+
+}
+// ---End-Of-File-------------------------------------------------------------
